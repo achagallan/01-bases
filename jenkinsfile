@@ -1,24 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Stop Docker Containers') {
             steps {
-                
-                    echo "Etapa BUILD no disponible"
+                script {
+                    // Eliminar los contenedores y redes creados por docker-compose
+                    sh 'docker-compose down'
                 }
             }
-            stage ('Tests'){
-                steps {
-                    echo 'Etapa TEST no disponible'
-                }
-
-            }
-            stage('Deploy'){
-                steps(
-                    sh "docker-compose down -w"
-                    sh "docker-compose up -d --build"
-                )
-            }
-            }
-            }
-            
+        }
+    }
+}
